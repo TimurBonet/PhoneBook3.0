@@ -1,13 +1,9 @@
 ﻿using PhoneBook3._0;
-using System.Reflection.PortableExecutable;
 using System.Data.SqlClient;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System;
 
-
-
-
 namespace PhoneBook3._0
+
 {
     public class DBConnect
     {
@@ -21,7 +17,6 @@ namespace PhoneBook3._0
 
                 string query = "INSERT INTO contacts (contactType, name, phoneNumber, textComments, email, isPrivate, city, url) " +
                                           "VALUES (@contactType, @name, @phoneNumber, @textComments, @email, @isPrivate, @city, @url)";
-
                 /**
                  * Вносим в базу данных проверенный объект, неисползуемые поля будут null
                  */
@@ -48,23 +43,6 @@ namespace PhoneBook3._0
             return true;
         }
 
-        private CType RerurnEnum(string value)
-        {
-            return (CType)Enum.Parse(typeof(CType), value);
-        }
-
-        private int ReturnPhoneNumber(string nums)
-        {
-            if (Int32.TryParse(nums, out int result))
-            {
-                return result;
-            }
-            else
-            {
-                throw new ArgumentException("Невозможно преобразовать в телефонный номер");
-            }
-
-        }
 
         public List<IContact> FindContactByContactType(String contactType)
         {
@@ -72,8 +50,8 @@ namespace PhoneBook3._0
             using (SqlConnection sqlConnection = new SqlConnection(ConectionString))
             {
                 sqlConnection.Open();
-                string query = "";
 
+                string query = "";
                 switch (contactType)
                 {
                     case "ALL":
@@ -193,10 +171,6 @@ namespace PhoneBook3._0
                                     null,
                                     reader["url"]?.ToString());
                             }
-                            /*Console.WriteLine(String.Format(String.Format("{1} \t | {2} \t | {3} \t | {4} \t {5} \t | {6} \t | {7}",
-                            reader[1], reader[2], reader[3], reader[4],
-                            reader[5] *//* Возможно вставить ContactType вместо isPrivate*//*, reader[6], reader[7])));*/
-
                         }
                     }
                     else
@@ -206,6 +180,23 @@ namespace PhoneBook3._0
                     }
                 }
                 sqlConnection.Close();
+            }
+        }
+
+        private CType RerurnEnum(string value)
+        {
+            return (CType)Enum.Parse(typeof(CType), value);
+        }
+
+        private int ReturnPhoneNumber(string nums)
+        {
+            if (Int32.TryParse(nums, out int result))
+            {
+                return result;
+            }
+            else
+            {
+                throw new ArgumentException("Невозможно преобразовать в телефонный номер");
             }
         }
     }

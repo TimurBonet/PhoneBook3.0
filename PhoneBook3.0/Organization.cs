@@ -1,14 +1,9 @@
 ﻿using PhoneBook3._0;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhoneBook3._0
+
 {
-    class Organization : IContact, IEquatable<Organization>
+    public class Organization : IContact, IEquatable<Organization>
     {
         public CType ContactType
         { get; set; }
@@ -42,7 +37,6 @@ namespace PhoneBook3._0
             Url = url;
         }
 
-
         public override bool Equals(object obj)
         {
             return Equals(obj as Organization);
@@ -50,8 +44,12 @@ namespace PhoneBook3._0
 
         public bool Equals(Organization other)
         {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
+            if (other is null) 
+                return false;
+
+            if (ReferenceEquals(this, other)) 
+                return true;
+
             return other != null &&
                    ContactType == other.ContactType &&
                    Name == other.Name &&
@@ -73,6 +71,5 @@ namespace PhoneBook3._0
             hash = hash * 23 + Url.GetHashCode();
             return hash;
         }
-
     }
 }

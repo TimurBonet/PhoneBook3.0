@@ -1,6 +1,0 @@
-@PhoneBook3._0_HostAddress = http://localhost:5039
-
-GET {{PhoneBook3._0_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
